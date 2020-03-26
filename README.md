@@ -9,6 +9,11 @@ The repeat interval can be prepended with the `OnComplete` keyword which will ma
 
 For the interval the format is a number followed by either `d`, `w`, `m` or `y` for day, week, month and year respectively.
 
+## Examples
+Consider a template task "Water the plants" that you want to do every 3 days, but to avoid over-watering your plants if you miss one day you want to do it only 3 days after you've actually watered them. To do this you could set the repeat field to `OnComplete 3d`
+
+Consider something you want to do everyday, just set the repeat field to `1d`, it will be recreated each day.
+
 ## Prerequisites
 * Python 3.8
 * A Jira project obviously
