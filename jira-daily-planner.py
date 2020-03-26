@@ -54,13 +54,13 @@ def get_repeat_field_id():
 
 def get_repeat_date(refdate, repeat):
     if (interval := re.match('(\d+)d', repeat)):
-        return refdate + relativedelta(days=+int(interval.group(1)))
+        return refdate.date() + relativedelta(days=+int(interval.group(1)))
     elif (interval := re.match('(\d+)w', repeat)):
-        return refdate + relativedelta(weeks=+int(interval.group(1)))
+        return refdate.date() + relativedelta(weeks=+int(interval.group(1)))
     elif (interval := re.match('(\d+)m', repeat)):
-        return refdate + relativedelta(months=+int(interval.group(1)))
+        return refdate.date() + relativedelta(months=+int(interval.group(1)))
     elif (interval := re.match('(\d+)y', repeat)):
-        return refdate + relativedelta(years=+int(interval.group(1)))
+        return refdate.date() + relativedelta(years=+int(interval.group(1)))
 
 
 def should_create_today(createddate, resolutiondate, repeat):
