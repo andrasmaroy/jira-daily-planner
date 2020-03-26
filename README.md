@@ -4,10 +4,13 @@ The goal of this script is to recreate certain tasks in a Jira project every day
 
 In the given project it expects an issue type to use as templates and another one to use as actual tasks.
 In the template tasks the interval with which the tasks are expected to repeat, is to bet set in a specific field (`Repeat` by default).
+According to the interval a task is created and linked to its template as a clone.
 
 The repeat interval can be prepended with the `OnComplete` keyword which will make the script count the interval from the latest closed task instead of the latest creation date.
 
 For the interval the format is a number followed by either `d`, `w`, `m` or `y` for day, week, month and year respectively.
+
+If there is a task for the given template still open and the repeat schedule is due that day the task won't be created again.
 
 ## Examples
 Consider a template task "Water the plants" that you want to do every 3 days, but to avoid over-watering your plants if you miss one day you want to do it only 3 days after you've actually watered them. To do this you could set the repeat field to `OnComplete 3d`
