@@ -65,9 +65,9 @@ def get_repeat_date(refdate, repeat):
 
 def should_create_today(createddate, resolutiondate, repeat):
     if repeat.startswith("OnComplete"):
-        return get_repeat_date(resolutiondate, repeat[11:]) == date.today()
+        return get_repeat_date(resolutiondate, repeat[11:]) <= date.today()
     else:
-        return get_repeat_date(createddate, repeat) == date.today()
+        return get_repeat_date(createddate, repeat) <= date.today()
 
 
 def clone_issue(template):
