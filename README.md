@@ -34,3 +34,17 @@ The script uses the following environment variables for configuration
 | JIRA_CREATED_STATE | Issue state upon creation          | Backlog       |
 | JIRA_DONE_STATE    | Issue state when closed            | Done          |
 | JIRA_FIELD_NAME    | Field name to use for the interval | Repeat        |
+
+## Usage
+
+First install the dependencies (preferably in a [virtualenv](https://docs.python.org/3/library/venv.html#venv-def)):
+```bash
+pip install -r requirements.txt
+```
+
+Set the above environment variables according to your environment / Jira setup, then run:
+```bash
+python jira-daily-planner.py
+```
+
+If everything was set correctly you should see the newly created tasks on your board.
