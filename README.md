@@ -48,3 +48,23 @@ python jira-daily-planner.py
 ```
 
 If everything was set correctly you should see the newly created tasks on your board.
+
+## Docker
+
+To run the script using docker you can use the included Dockerfile, which uses cron to run the script at 1 AM every day. The above environment variables can be passed to configure the service, with the addition of the `JIRA_PASSWORD_FILE` variable which is designed to be used with docker secrets. Basically you should point it to a file containing the password to avoid passing the password in plain text as an environment variable, the contents of that file will be read and set as `JIRA_PASSWORD` environment variable.
+
+Also you should set the `TZ` environment variable to your matching timezone so the cron job is executed at the right time.
+
+### Example
+Plain docker:
+```bash
+docker build . -t jira-daily-planner:latest
+docker run --rm --name jira-daily-planner -e JIRA_USER=foo -e JIRA_URL=https://jira.yourdomain.com -e JIRA_PASSWORD=VerySecretP4ssw0rd TZ=Europe/Budapest jira-daily-planner:latest
+```
+
+Docker swarm:
+```bash
+docker build . -t jira-daily-planner:latest
+printf "VerySecretP4ssw0rd" | docker secret create jira-user-password -
+docker service create --name jira-daily-planner --secret jira-user-password -e JIRA_USER=foo -e JIRA_URL=https://jira.yourdomain.com -e JIRA_PASSWORD_FILE=/run/secrets/jira-user-password -e TZ=Europe/Budapest jira-daily-planner:latest
+```
